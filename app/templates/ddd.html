@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      body {
+        background-color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .inputfile {
+      	width: 0.1px;
+      	height: 0.1px;
+      	opacity: 0;
+      	overflow: hidden;
+      	position: absolute;
+      	z-index: -1;
+      }
+      .inputfile + label,
+      #submit + label {
+          font-size: 1.25em;
+          font-weight: 700;
+          color: white;
+          background-color: #4D4D4D;
+          display: inline-block;
+      }
+
+      .inputfile:focus + label,
+      .inputfile + label:hover,
+      #submit:focus + label,
+      #submit + label:hover {
+          background-color: red;
+      }
+      .inputfile + label,
+      #submit + label {
+      	cursor: pointer;
+      }
+      .inputfile:focus + label,
+      #submit:focus + label {
+      	outline: 1px dotted #000;
+      	outline: -webkit-focus-ring-color auto 10px;
+      }
+      .inputfile + label *,
+      #submit + label * {
+      	pointer-events: none;
+      }
+      form {
+        display: inline-block;
+      }
+      #submit {
+        display: none;
+        margin-left: 10px;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+        overflow: hidden;
+        margin-right: 5px;
+        padding-left:3px;
+      }
+      #fileName {
+        color: #FFFFFF;
+        margin-top: 10px;
+        font-size: 0.75em;
+      }
+    </style>
+    <script src="" charset="utf-8">
+      var inputs = document.querySelectorAll( '.inputfile' );
+      Array.prototype.forEach.call( inputs, function( input )
+      {
+      	var label	 = input.nextElementSibling,
+      		labelVal = label.innerHTML;
+
+      	input.addEventListener( 'change', function( e )
+      	{
+      		var fileName = '';
+      		if( this.files && this.files.length > 1 )
+      			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+      		else
+      			fileName = e.target.value.split( '\\' ).pop();
+
+      		if( fileName ) {
+      			label.querySelector( 'span' ).innerHTML = fileName;
+            document.getElementById('fileName').textContent = fileName; // Add this line
+          } else {
+      			label.innerHTML = labelVal;
+          }
+
+            setTimeout(function(){
+              document.getElementById('submit').style.display = 'inline-block';
+            }, 1000); // waits for 1 second
+      	});
+      });
+    </script>
+  </head>
+  <body>
+    <div class="upload_file">
+      <h3>Upload FIle</h3>
+      <p>{{ value }}</p>
+    </div>
+    <form method = 'post' enctype=multipart/form-data">
+      <input type="file" name="file" id="file" class="inputfile" />
+      <label for="file"><img src="templates/aaa.png" alt="Icon"><strong>Choose a file</strong></label>
+      <input type="submit" id="submit" value = "upload" />
+      <label for="submit"><strong>Upload</strong></label>
+    </form>
+    <div id="fileName"></div>
+  </body>
+</html>

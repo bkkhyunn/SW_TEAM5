@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>front</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+  </head>
+  <body>
+    <header>
+      <div class="top_wrap">
+        <div class="title_wrap">
+          <h1 class="title">Black_Ice_Detetion</h1>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="main_wrap">
+        <div class="inner_wrap">
+          <div class="upload_file">
+            <h3>Upload FIle</h3>
+            <p>{{ value }}</p>
+          </div>
+          <div class="upload_area">
+            <form method = 'post' enctype=multipart/form-data>
+              <input type = "file" name = "file">
+              <input type="submit" value = "upload">
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

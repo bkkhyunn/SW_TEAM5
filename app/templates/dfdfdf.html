@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #popup {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 10px;
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
+</head><img src="{{ video_feed_url }}" alt="Video Feed">
+<body>
+  <video id="video" width="640" height="480" controls>
+    <source src="{{ url_for('static', filename='videos/sample.mp4') }}" type="video/mp4">
+  </video>
+
+  <div id="popup">전방에 블랙아이스가 있습니다. 서행하세요.</div>
+
+  <script>
+    var video = document.getElementById("video");
+    var popup = document.getElementById("popup");
+
+    video.addEventListener("play", function() {
+      // Show the popup when the video starts playing
+      popup.style.display = "block";
+    });
+
+    video.addEventListener("pause", function() {
+      // Hide the popup when the video is paused
+      popup.style.display = "none";
+    });
+  </script>
+</body>
+</html>
